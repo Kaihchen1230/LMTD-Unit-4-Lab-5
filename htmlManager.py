@@ -1,4 +1,5 @@
 from htmlDocument import HTML_Document
+from awsManager import AWS_Manager
 
 
 class HTML_Manager:
@@ -18,7 +19,7 @@ class HTML_Manager:
                 <body>
             """,
             "body": """<form>""",
-            "end": """</form?</body></html>"""
+            "end": """</form></body></html>"""
         }
 
         self.options = {
@@ -85,8 +86,8 @@ class HTML_Manager:
         self.html_documents["body"] += html_document.get_html_info()
 
     def create_email_field(self):
-        start_tag = """<div class="form-group"><label for="email-field">Email address</label>"""
-        content = """<input type="email" class="form-control" id="email-field">
+        start_tag = """<div class="form-group text-center"><label for="email-field" class="p-r-2">Email address:</label>"""
+        content = """<input type="email" class="form-control d-inline w-50" id="email-field">
                     """
         end_tag = """</div>"""
 
@@ -96,8 +97,8 @@ class HTML_Manager:
 
     def create_password_field(self):
 
-        start_tag = """<div class="form-group"><label for="password-field">Password</label>"""
-        content = """<input type="password" class="form-control" id="password-field">
+        start_tag = """<div class="form-group text-center"><label for="password-field" class="p-r-2">Password: </label>"""
+        content = """<input type="password" class="form-control d-inline w-50" id="password-field">
                             """
         end_tag = """</div>"""
 
@@ -121,9 +122,9 @@ class HTML_Manager:
 
             select_options.add(option)
 
-        start_tag = f"""<div class="form-group">
-                            <label for="select-field">{select_section_name}</label>
-                            <select class="form-control" id="select-field"> """
+        start_tag = f"""<div class="form-group text-center">
+                            <label for="select-field" class="p-r-2">{select_section_name}</label>
+                            <select class="form-control d-inline w-50" id="select-field"> """
 
         content = ""
 
@@ -142,10 +143,10 @@ class HTML_Manager:
 
         section_name = input("Enter the name for this section: ")
 
-        start_tag = f"""<div class="form-group">
-                            <label for="{section_name}"> {section_name} </label>"""
+        start_tag = f"""<div class="form-group text-center">
+                            <label for="{section_name}" class="p-r-2"> {section_name} </label>"""
 
-        content = f"""<textarea class="form-control" id="{section_name}" rows="3"></textarea>"""
+        content = f"""<textarea class="form-control d-inline w-50" id="{section_name}" rows="3"></textarea>"""
         end_tag = """</div>"""
 
         html_document = HTML_Document(start_tag, content, end_tag)
@@ -180,3 +181,6 @@ class HTML_Manager:
                 html_page += content
 
             simple_html.write(html_page)
+
+            aws_manager = AWS_Manager()
+            aws_manager.upload_file()
