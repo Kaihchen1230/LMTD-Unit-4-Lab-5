@@ -22,6 +22,10 @@ class HTML_Manager:
             "end": """</form></body></html>"""
         }
 
+        self.aws_manager = AWS_Manager()
+
+        self.aws_manager.download_file()
+
         self.options = {
             "1": self.create_header,
             "2": self.create_email_field,
@@ -182,5 +186,4 @@ class HTML_Manager:
 
             simple_html.write(html_page)
 
-            aws_manager = AWS_Manager()
-            aws_manager.upload_file()
+            self.aws_manager.upload_file()

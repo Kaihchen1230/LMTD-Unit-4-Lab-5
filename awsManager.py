@@ -1,6 +1,6 @@
 import boto3
 
-s3_resource = boto3.resource('s3')
+s3_client = boto3.client('s3')
 
 
 class AWS_Manager:
@@ -14,8 +14,16 @@ class AWS_Manager:
     def upload_file(self):
 
         try:
-            s3_resource.meta.client.upload_file(
-                './simple_html.html', 'lmtd-class', 'kai_html.html')
+            s3_client.upload_file(
+                Filename="simple_html.html", Bucket="lmtd-class", Key="kai_html_testing.html")
 
         except:
             print('there is an err')
+
+    def download_file(self):
+        try:
+            s3_client.download_file(
+                'lmtd-class', 'kai_html_testing.html', 'kai_html_testing.html')
+
+        except:
+            print('there is an error')
